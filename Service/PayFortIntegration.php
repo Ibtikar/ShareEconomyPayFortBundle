@@ -24,7 +24,9 @@ class PayFortIntegration
     private $baseApiURL;
     private $language = 'en';
     private $currency;
-
+    // to use if the card holder dosen't have an email?
+    private $spareEmail = "";
+    
     const SANDBOX_MODE                 = "sandbox";
     const PRODUCTION_MODE              = "production";
     const SANDBOX_API_URL              = "https://sbpaymentservices.payfort.com/FortAPI/paymentApi";
@@ -42,7 +44,9 @@ class PayFortIntegration
         $this->config     = $config;
         $this->currency   = $config['currency'];
         $this->mode       = $config['environment'];
-
+        if (isset($config['spare_email'])) {
+            $this->spareEmail = $config['spare_email'];
+        }
         if ($config['environment'] == self::PRODUCTION_MODE) {
             $this->baseMerchantPageURL = self::PRODUCTION_MERCHANT_PAGE_URL;
             $this->baseApiURL          = self::PRODUCTION_API_URL;
@@ -243,8 +247,12 @@ class PayFortIntegration
      */
     public function purchaseTransaction(PfTransaction $transaction)
     {
+        $email = $transaction->getPaymentMethod()->getHolder()->getEmail();
+        if (!$email && $this->spareEmail) {
+            $email = $this->spareEmail;
+        }
         return $this->purchase($transaction->getPaymentMethod()->getTokenName(), $transaction->getAmount(), $transaction->getMerchantReference(),
-                $transaction->getPaymentMethod()->getHolder()->getEmail());
+                $email);
     }
 
     /**

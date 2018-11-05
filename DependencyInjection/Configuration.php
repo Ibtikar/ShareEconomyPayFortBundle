@@ -86,6 +86,9 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('invoice_entity_class')
                         ->cannotBeEmpty()
                     ->end()
+                    ->scalarNode('spare_email')
+                        ->cannotBeEmpty()
+                    ->end()
                 ->end();
 
         return $treeBuilder;
