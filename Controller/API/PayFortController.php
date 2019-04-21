@@ -5,7 +5,9 @@ namespace Ibtikar\ShareEconomyPayFortBundle\Controller\API;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Operation;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
 use Ibtikar\ShareEconomyPayFortBundle\APIResponse as AppAPIResponses;
 use Ibtikar\ShareEconomyToolsBundle\APIResponse as ToolsBundleAPIResponses;
 
@@ -15,13 +17,15 @@ class PayFortController extends Controller
     /**
      * request device SDK token
      *
-     * @ApiDoc(
-     *  section="PayFort",
-     *  tags={
-     *     "stable"="green"
-     *  },
-     *  output="Ibtikar\ShareEconomyPayFortBundle\APIResponse\SDKTokenResponse"
+     * @Operation(
+     *     tags={"PayFort"},
+     *     summary="request device SDK token",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
+     *
      * @author Karim Shendy <kareem.elshendy@ibtikar.net.sa>
      * @return JsonResponse
      */
@@ -46,27 +50,44 @@ class PayFortController extends Controller
     /**
      * pay1
      *
-     * @ApiDoc(
-     *  section="PayFort",
-     *  tags={
-     *     "stable"="green"
-     *  },
-     *  authentication=true,
-     *  parameters={
-     *      {"name"="email", "dataType"="string", "required"=true},
-     *      {"name"="tokenName", "dataType"="string", "required"=true},
-     *      {"name"="merchantReference", "dataType"="string", "required"=true},
-     *  },
-     *  statusCodes = {
-     *      200="Returned on success",
-     *      422="Returned if there is a validation error in the sent data",
-     *      500="Returned if there is an internal server error"
-     *  },
-     *  responseMap = {
-     *      422="Ibtikar\ShareEconomyToolsBundle\APIResponse\ValidationErrors",
-     *      500="Ibtikar\ShareEconomyToolsBundle\APIResponse\InternalServerError"
-     *  }
+     * @Operation(
+     *     tags={"PayFort"},
+     *     summary="pay1",
+     *     @SWG\Parameter(
+     *         name="email",
+     *         in="formData",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="tokenName",
+     *         in="formData",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="merchantReference",
+     *         in="formData",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned on success"
+     *     ),
+     *     @SWG\Response(
+     *         response="422",
+     *         description="Returned if there is a validation error in the sent data"
+     *     ),
+     *     @SWG\Response(
+     *         response="500",
+     *         description="Returned if there is an internal server error"
+     *     )
      * )
+     *
      * @author Ahmed Yahia <ahmed.mahmoud@ibtikar.net.sa>
      * @return JsonResponse
      */

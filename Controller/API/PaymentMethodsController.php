@@ -5,7 +5,9 @@ namespace Ibtikar\ShareEconomyPayFortBundle\Controller\API;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Operation;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
 use Ibtikar\ShareEconomyToolsBundle\APIResponse as ToolsBundleAPIResponses;
 use Ibtikar\ShareEconomyPayFortBundle\Entity\PfPaymentMethod;
 
@@ -87,33 +89,69 @@ class PaymentMethodsController extends Controller
     /**
      * edit payment method
      *
-     * @ApiDoc(
-     *  section="PayFort",
-     *  tags={
-     *     "stable"="green"
-     *  },
-     *  authentication=true,
-     *  parameters={
-     *      {"name"="cardNumber", "dataType"="string", "required"=true},
-     *      {"name"="expiryDate", "dataType"="string", "required"=true},
-     *      {"name"="tokenName", "dataType"="string", "required"=true},
-     *      {"name"="paymentOption", "dataType"="string", "required"=false},
-     *      {"name"="merchantReference", "dataType"="string", "required"=true},
-     *      {"name"="fortId", "dataType"="string", "required"=true}
-     *  },
-     *  statusCodes = {
-     *      200="Returned on success",
-     *      422="Returned if there is a validation error in the sent data",
-     *      403="Access denied",
-     *      500="Returned if there is an internal server error"
-     *  },
-     *  responseMap = {
-     *      200="Ibtikar\ShareEconomyPayFortBundle\APIResponse\PaymentMethodDetailsResponse",
-     *      422="Ibtikar\ShareEconomyToolsBundle\APIResponse\ValidationErrors",
-     *      403="Ibtikar\ShareEconomyToolsBundle\APIResponse\AccessDenied",
-     *      500="Ibtikar\ShareEconomyToolsBundle\APIResponse\InternalServerError"
-     *  }
+     * @Operation(
+     *     tags={"PayFort"},
+     *     summary="edit payment method",
+     *     @SWG\Parameter(
+     *         name="cardNumber",
+     *         in="formData",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="expiryDate",
+     *         in="formData",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="tokenName",
+     *         in="formData",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="paymentOption",
+     *         in="formData",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="merchantReference",
+     *         in="formData",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="fortId",
+     *         in="formData",
+     *         description="todo",
+     *         required=false,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned on success"
+     *     ),
+     *     @SWG\Response(
+     *         response="422",
+     *         description="Returned if there is a validation error in the sent data"
+     *     ),
+     *     @SWG\Response(
+     *         response="403",
+     *         description="Access denied"
+     *     ),
+     *     @SWG\Response(
+     *         response="500",
+     *         description="Returned if there is an internal server error"
+     *     )
      * )
+     *
      * @author Karim Shendy <kareem.elshendy@ibtikar.net.sa>
      * @return JsonResponse
      */
@@ -345,23 +383,23 @@ class PaymentMethodsController extends Controller
     /**
      * list user payment methods
      *
-     * @ApiDoc(
-     *  section="PayFort",
-     *  tags={
-     *     "stable"="green"
-     *  },
-     *  authentication=true,
-     *  statusCodes = {
-     *      200="Returned on success",
-     *      403="Access denied",
-     *      500="Returned if there is an internal server error"
-     *  },
-     *  responseMap = {
-     *      200="Ibtikar\ShareEconomyToolsBundle\APIResponse\PaymentMethodDetailsResponse",
-     *      403="Ibtikar\ShareEconomyToolsBundle\APIResponse\AccessDenied",
-     *      500="Ibtikar\ShareEconomyToolsBundle\APIResponse\InternalServerError"
-     *  }
+     * @Operation(
+     *     tags={"PayFort"},
+     *     summary="list user payment methods",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned on success"
+     *     ),
+     *     @SWG\Response(
+     *         response="403",
+     *         description="Access denied"
+     *     ),
+     *     @SWG\Response(
+     *         response="500",
+     *         description="Returned if there is an internal server error"
+     *     )
      * )
+     *
      * @author Karim Shendy <kareem.elshendy@ibtikar.net.sa>
      * @return JsonResponse
      */
